@@ -1,0 +1,476 @@
+*
+{
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0%;
+}
+.sidebar header
+{
+    text-align: center;
+    font-weight: bold;
+    line-height: 70px;
+    background-color:rgb(232, 194, 144) ;
+    user-select: none;
+    font-size: 28px;
+}
+.sidebar ul li 
+{
+    padding-left:20px;
+    width: 100%;
+    line-height: 70px;
+    font-size: 18px;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(215, 102, 102);
+    border-bottom: 1px solid rgb(213, 128, 128);
+    transition: .9s;
+}
+.sidebar
+{
+    width: 200px;
+    height: 70%;
+    background-color: #e0decceb;
+    color: black;
+    border-radius: 20px;
+    position:fixed;
+    left: -250px;
+    transition: all .5s ease;
+}
+.sidebar ul a
+{
+    display: block;
+}
+ul li:hover a
+{
+ padding-left: 2%;
+}
+#check 
+{
+    display :none;
+}
+label #menu ,label #cancel
+{
+position: absolute;
+cursor: pointer;
+background:rgb(228, 172, 100);
+border-radius: 10px;
+position:fixed;
+}
+label #menu
+{
+    left:10px;
+    top:15px;
+    font-size: 35px;
+    color: black;
+    padding: 6px 12px;
+    transition: all .5s ease;
+}
+label #cancel
+{
+    z-index: 1111;
+    font-size: 35px;
+    top:20px;
+    left:-148px;
+    padding: 2px 8px;
+}
+#check:checked ~.sidebar
+{
+    left:0%;
+}
+#check:checked ~ label #menu
+{
+    left:250px;
+    opacity: 0;
+    pointer-events: none;
+}
+#check:checked ~ label #cancel
+{
+    z-index: 1111;
+    font-size: 35px;
+    top:420px;
+    left:145px;
+    padding: 2px 8px;
+    transition: all 0.5s ease;
+}
+section
+{
+    background:url(category.jpeg) no-repeat;
+    background-position: center;
+    transition: all .5s ease;
+    background-size: cover;
+    height: 120vh;
+    background-attachment: fixed;
+}
+
+
+
+  
+.city
+{
+    position: absolute;
+    top: 1%;
+    left:20%;
+ 
+}
+.city #cityf
+{
+    color: rgb(204, 215, 48);
+    font-weight: bolder;
+    font-size: 30;
+}
+.city #city_fieldset
+{
+    display: flex;
+    width: 900px;
+    height: 200px;
+
+
+    border: none;
+    border-top: 3px solid rgb(204, 215, 48); /* Top horizontal line */
+}
+#trichy,#madurai,#chennai
+{
+    height: 70%;
+    width: 200px;
+    padding-top:43px;
+    border-radius: 10px;
+}
+.city h3
+{   
+    position: relative;
+    left: 100px;
+    background-color: rgb(224, 148, 48);
+    padding: 10px;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+
+.feather
+{
+    position: absolute;
+    top: 40%;
+    left:20%;
+ 
+}
+.feather #featherf
+{
+    color: rgba(239, 255, 8, 0.813);
+    font-weight: bolder;
+    font-size: 30;
+}
+.feather #f_fieldset
+{
+    display: flex;
+    width: 900px;
+    height: 200px;
+    border:none;
+    border-top: 3px solid rgb(204, 215, 48); 
+}
+
+#drona,#ksi,#chola
+{
+    height: 70%;
+    width: 200px;
+    padding-top:43px;
+    border-radius: 10px;
+}
+.feather h3
+{   
+    background-color:  rgb(224, 148, 48);
+    padding: 10px;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    left: 100px;
+}
+
+.nylon
+{
+    position: absolute;
+    top: 80%;
+    left:18%;
+ 
+}
+.nylon #nylonf
+{
+    color: rgba(239, 255, 8, 0.813);
+    font-weight: bolder;
+    font-size: 30;
+}
+.nylon #n_fieldset
+{
+    display: flex;
+    width: 900px;
+    height: 200px;
+    border:none;
+    border-top: 3px solid rgb(204, 215, 48); 
+}
+
+#smashmad,#baybadminton,#venba
+{
+    height: 70%;
+    width: 200px;
+    padding-top:43px;
+    border-radius: 10px;
+}
+.nylon h3
+{   
+    background-color:  rgb(224, 148, 48);
+    padding: 10px;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    left: 100px;
+}
+
+#test
+{
+    background-image: url('login3.jpg');
+    justify-content: center;
+    align-items: center;
+    display: flex;
+   height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#login
+{
+    border-radius: 40px;
+    background-color: rgb(150, 94, 234,0.2);
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-color: blueviolet;
+    border: 1px solid rgba(10, 10, 10, 0.3);
+    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.9);
+}
+.input-group #username ,#password
+{
+    background-color: rgb(170, 176, 174);
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-top: 5px;
+    height: 25px;
+    border:1px solid rgb(10,10,10,0.3);
+    width: 150px;
+}
+::placeholder {
+    color: #27312d;
+}
+#login h1
+{
+    padding-bottom: 20px;
+}
+#lsubmit
+{
+    background-color: rgb(141, 141, 216);
+    border:1px solid rgba(10,10,10,0.3);
+    border-radius: 10px;
+    height: 30px;
+    width: 60px;
+    cursor:pointer;
+}
+    
+#pegasus ,#featherclub ,#christoclub ,#Nethaji
+{
+    display: flex;
+    position: relative;
+    height: 280px;
+    background-color: rgb(127, 255, 212,0.1);
+    border:none
+}
+
+#pegasusi ,#featherclubi,#christoclubi,#Nethajii
+{
+    width: 33%;
+    height: 250px;
+    border-radius: 20px;
+    padding-left: 100px;
+    padding-top: 10px;
+}
+#pegasush4,#featherclubh4,#christoclubh4,#Nethajih4
+{
+    padding-left: 40px;
+    padding-top: 60px;
+    line-height: 50px;
+    font-size: 23;
+    color: rgb(255, 255, 255);
+}
+#pegasush , #featherclubh , #christoclubh,#Nethajih
+{
+    padding-left: 130px;
+    color: rgb(255, 255, 255);
+}
+#trichy_courts
+{
+    display: flex;
+    flex-direction: column;
+    background-image: url(foresr.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed 
+}
+
+#namentrybody
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-image: url(2.jpg);
+    background-position: center;
+    background-size: cover;
+    align-items:center;
+    justify-content: center;
+
+}
+#namentryfieldset
+{
+    position: relative;
+    top: 20px;
+    padding-left: 30px;
+    width: 400px;
+    height: 500px;
+    line-height: 50px;
+    border-radius: 10px;
+    border: 1px solid rgba(10,10,10,0.9);
+    background-color: rgb(39, 49, 45,0.9);
+}
+#playerheading
+{
+    display: flex;
+    flex-direction: row;
+}
+#playerheading1
+{
+    padding-left: 70px;
+    color: aliceblue;
+}
+#playerheading2
+{
+    padding-left: 40px;
+    color: aliceblue;
+}
+
+#name
+{
+    display: flex;
+    height: 20px;
+    align-items: center;
+    gap: 5px;
+}
+#p1name,#p2name
+{
+    width: 120px;
+    background-color: aliceblue;
+    border: 1px solid rgba(10, 10, 10, 0.3);
+    border-radius: 5px;
+}
+#homecourt
+{
+    display: flex;
+    align-items: center;
+    position:relative;
+}
+#homecourt input {
+    height: 20px;
+    width: 120px;
+    background-color: aliceblue;
+    border: 1px solid rgba(10, 10, 10, 0.3);
+    border-radius: 5px;
+    position:relative;
+    left: 10px;
+}
+#courtname
+{
+    display: flex;
+    align-items: center;
+    position:relative;
+}
+#tcourt input {
+    height: 20px;
+    width: 120px;
+    background-color: aliceblue;
+    border: 1px solid rgba(10, 10, 10, 0.3);
+    border-radius: 5px;
+    position:relative;
+    left: 10px;
+}
+#age
+{
+    display: flex;
+    flex-direction: row;
+    gap: 73px;
+    align-items: center;
+}
+#p1age,#p2age
+{
+    width: 30px;
+    height: 20px;
+    background-color: aliceblue;
+    border: 1px solid rgba(10, 10, 10, 0.3);
+    border-radius: 5px;
+}
+#gender
+{
+    display: flex;
+    flex-direction: rows;
+    gap: 30px;
+    align-items: center;
+    
+}
+#select
+{
+    height: 20px;
+    background-color: aliceblue;
+    border: 1px solid rgba(10, 10, 10, 0.3);
+    border-radius: 5px;
+}
+
+#shuttletype
+{
+    display: flex;
+    gap: 20px;
+}
+#payment
+{
+    display: flex;
+    gap: 20px;
+}
+#twobuttons
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+}
+#submit
+{
+    height: 40px;
+    width: 60px;
+    border-radius: 20px;
+    background-color: rgb(182, 221, 221);
+    border: 1px solid rgba(10,10,10,0.9);
+    cursor: pointer;
+}
+#viewbtn
+{
+    height: 40px;
+    width: 80px;
+    border-radius: 10px;
+    background-color :rgb(234, 166, 77);
+    border: 1px solid rgba(10,10,10,0.9);
+    cursor: pointer;
+}
+
+#fixtures1
+{
+    background-image: url(login3.jpg);
+}

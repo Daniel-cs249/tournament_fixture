@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> registration</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body id="namentrybody">
+        <form action="http://localhost/new/entry.php" method="post">
+        <fieldset id="namentryfieldset">
+            <div id="playerheading">
+                <h2 id="playerheading1">Player 1</h2>
+                <h2 id="playerheading2">Player 1</h2>
+            </div>
+            
+            <div id="name">
+                <h3 style="color :antiquewhite">Name :</h3>
+                <input type="text" name="p1name" id="p1name" placeholder="name" autocomplete="off" required>
+                <input type="text" name="p2name" id="p2name" placeholder="name" autocomplete="off" required>
+               
+            </div>
+
+            <div id="homecourt">
+
+                <h3 style="color :antiquewhite">Home-court :</h3>
+                <input type="text" name="homecourt" id="homecourt" autocomplete="off" placeholder="Home-court" required>
+
+            </div>
+            <div id="homecourt">
+
+                <h3 style="color :antiquewhite">Tournament-court :</h3>
+                <input type="text" name="tcourt" id="tcourt" autocomplete="off" placeholder="Tournament_court" required>
+
+            </div>
+            
+
+            <div id="age">
+                <h3 style="color :antiquewhite">Age  :</h3>
+                <input type="text" name="p1age" id="p1age" placeholder="age" autocomplete="off" required>
+                <input type="text" name="p2age" id="p2age" placeholder="age" autocomplete="off" required>
+            </div>
+
+            <div id="gender">
+                <h3 style="color :antiquewhite">Gender  :</h3>  
+                <select name="gender1" id="select" required>
+                    <option value=""disabled selected>select</option>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+                            
+                <select name="gender2" id="select" required>
+                    <option value=""disabled selected>select</option>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+            </div>
+
+            <div id="shuttletype">
+                <h3 style="color :antiquewhite"> Shuttle :</h3>
+                <input type="radio" name="typen" value ="feather" id="featherr" required><h4 style="color :rgb(234, 166, 77)">feather</h4>
+                <input type="radio" name="typen" value ="nylon" id="nylonr" required><h4 style="color :rgb(234, 166, 77)">nylon</h4>
+                
+            </div>
+
+            <div id="payment">
+                <h3 style="color :antiquewhite"> Payment:</h3>
+                <input type="radio" name="paid" value ="paid" id="paid" required><h4 style="color :rgb(234, 166, 77)">Paid</h4>
+                <input type="radio" name="paid" value ="not_paid"  id="npaid" required><h4 style="color :rgb(234, 166, 77)">Not-Paid</h4>
+                
+            </div>
+
+            <div id="twobuttons">
+                <input type="submit" name="submit" id="submit" value="submit">
+                <a href="http://localhost/new/view_team.php"><input type="button" name="viewbtn" id="viewbtn" value="View teams"></a>
+                
+            </div>
+        </fieldset>
+    </form>
+    </body>
+</html
