@@ -36,7 +36,7 @@ if(isset($_POST['submit']))
     $selectedPaidStatus = ($paidStatus === 'paid') ? "Paid" : (($paidStatus === 'not_paid') ? "Not-Paid" : null);
 $host="localhost"; 
 $user="root";
-$pass="abc123";
+$pass="";
 $db="tournament";
 $conn=new mysqli($host,$user,$pass,$db,3307);
 if($conn->connect_error)
