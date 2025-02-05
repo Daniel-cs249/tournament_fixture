@@ -34,7 +34,7 @@
 <table>
 
 <?php
-$conn=mysqli_connect('localhost','root','abc123','tournament',3307);
+$conn=mysqli_connect('localhost','root','','tournament',3307);
 if($conn->connect_error)
 {
     die("connection failed" .$conn->error);

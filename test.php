@@ -52,7 +52,7 @@
 </head>
 <body>
 <?php
-$conn = new mysqli('localhost', 'root', 'abc123', 'tournament', 3307);
+$conn = new mysqli('localhost', 'root', '', 'tournament', 3307);
 if ($conn->connect_error) {
     die("Connection failure: " . $conn->connect_error);
 }

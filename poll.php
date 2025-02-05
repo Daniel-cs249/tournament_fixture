@@ -73,7 +73,7 @@
     <?php
     $host = "localhost";
     $user = "root";
-    $pass = "abc123";
+    $pass = "";
     $db = "tournament";
     $port = 3307;
 

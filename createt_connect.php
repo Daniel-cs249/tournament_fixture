@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     // Database connection
     $host = "localhost";
     $user = "root";
-    $pass = "abc123";
+    $pass = "";
     $db = "tournament";
     $conn = new mysqli($host, $user, $pass, $db, 3307);
 

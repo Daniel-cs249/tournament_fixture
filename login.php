@@ -4,7 +4,7 @@ if(isset ($_POST['submit']))
 {
     $host = "localhost";
     $user = "root";
-    $pass = "abc123";
+    $pass = "";
     $db = "tournament";
     $conn = new mysqli($host, $user, $pass, $db, 3307);
     if($conn->connect_error)
