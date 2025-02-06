@@ -89,13 +89,13 @@
             <table border="1">
                 <?php
                 // Connect to the database
-                $conn = new mysqli('localhost', 'root', 'abc123', 'tournament', '3307');
+                $conn = new mysqli('localhost', 'root', '', 'tournament', '3307');
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
 
                 // Fetch distinct polls for the specified court
-                $distinctpoll = "SELECT DISTINCT(poll) AS poll FROM players WHERE tcourt='pegasus'";
+                $distinctpoll = "SELECT DISTINCT(poll) AS poll FROM players WHERE tcourt='venba'";
                 $selected = $conn->query($distinctpoll);
 
                 // Start table with header

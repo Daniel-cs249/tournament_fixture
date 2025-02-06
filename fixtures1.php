@@ -82,7 +82,7 @@
         
 <?php
 echo "<form action='' method='post'>";
-$conn= new mysqli('localhost','root','abc123','tournament',3307);
+$conn= new mysqli('localhost','root','','tournament',3307);
 if($conn->connect_error)
 {
     die("connection failure".$conn->connect_error);
@@ -99,7 +99,7 @@ $pollnumber=1;
 for ($i = 0; $i < count($arr); $i++) 
 {
     $pollno=$arr[$i];
-    $select_pollno="select player_1 from players where poll='$pollno' and tcourt='pegasus'";
+    $select_pollno="select player_1 from players where poll='$pollno' and tcourt='venba'";
     $ex2=$conn->query($select_pollno);
     echo "<table id='table-container'>";
     echo "<tr><th colspan='7'>Poll : ".$pollnumber."</th></tr>";
@@ -138,7 +138,7 @@ echo "</form>";
 $conn->close();
 ?>
 <?php
-$conn= new mysqli('localhost','root','abc123','tournament',3307);
+$conn= new mysqli('localhost','root','','tournament',3307);
 if (isset($_POST['submit'])) {
     foreach ($_POST['score1'] as $player1 => $matches) {
         foreach ($matches as $player2 => $score1) {

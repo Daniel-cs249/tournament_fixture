@@ -52,6 +52,7 @@
 </head>
 <body>
 <?php
+ob_start();
 $conn = new mysqli('localhost', 'root', '', 'tournament', 3307);
 if ($conn->connect_error) {
     die("Connection failure: " . $conn->connect_error);
@@ -64,11 +65,11 @@ $pollResult = $conn->query($pollQuery);
 
 $pollNumber = 1;
 while ($pollRow = $pollResult->fetch_assoc()) {
-    $poll = $pollRow['poll'];
-    $playerQuery = "SELECT player_1 FROM players WHERE poll = '$poll' AND tcourt = 'pegasus'";
+    $poll = $pollRow['poll'];                                           //poll gets the value frim the database with the name of the column poll
+    $playerQuery = "SELECT player_1 FROM players WHERE poll = '$poll' AND tcourt = 'venba'";
     $playerResult = $conn->query($playerQuery);
 
-    $players = [];
+    $players = [];                                                      //empty array for our use case
     while ($playerRow = $playerResult->fetch_assoc()) {
         $players[] = $playerRow['player_1'];
     }
@@ -117,12 +118,14 @@ if (isset($_POST['submit'])) {
         }
         echo "<p>Scores updated successfully!</p>";
         header('location: fixtures2.php');
+        exit();
     } else {
         echo "<p>No scores submitted.</p>";
     }
 }
 
 $conn->close();
+ob_end_flush();
 ?>
 </body>
 </html>
