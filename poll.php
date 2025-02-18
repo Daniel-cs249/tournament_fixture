@@ -57,8 +57,10 @@
 <body>
     
     <form method="post" action="">
-        <h2>Enter your court name:</h2>
-        <input type="text" name="courtname" required>
+        <h2>Select the court :</h2>
+        <select name="courtname">                               //complete 
+            <option value=></option>
+        </select>
 
         <h2>Number of teams in each poll:</h2>
         <input type="number" name="limit" min="1" required>
@@ -92,7 +94,14 @@
         // Get total teams
         $query = "SELECT COUNT(*) AS total_teams FROM players WHERE tcourt = '$courtname'";
         $result = $conn->query($query);
+        //getting the team which are registered in tournament for the dropdown list
+        $reg_teams="select court_name from create_tournament";
+        $reg_teams_view=$conn->query($reg_teams);
+        if($reg_teams_view && $dropdown_arr=$reg_teams_view->fetch_assoc())
+        {
+            $reg_teams=$dropdown_arr['court_name']; //all the t_court names are stored not_checked
 
+        }
         if ($result && $row = $result->fetch_assoc()) {
             $totalTeams = $row['total_teams'];
             echo "<h3>Total teams: $totalTeams</h3>";
