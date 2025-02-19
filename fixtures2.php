@@ -88,6 +88,7 @@
         <form action="" method="post">
             <table border="1">
                 <?php
+                session_start();    
                 // Connect to the database
                 $conn = new mysqli('localhost', 'root', '', 'tournament', '3307');
                 if ($conn->connect_error) {
@@ -120,19 +121,31 @@
                     for ($j = $i + 1; $j < count($arr); $j++) {
                         echo "<tr>
                                 <td>{$arr[$i]}</td>
-                                <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score1]' required></td>
+                                <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score1]' ></td>
                                 <td>VS</td>
                                 <td>{$arr[$j]}</td>
-                                <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score2]' required></td>
+                                <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score2]' ></td>
                               </tr>";
                     }
                 }
                 ?>
             </table>
             <input type="submit" name="submit" value="Submit Scores">
+
+            <input type="submit" name="restart" value="restart Tournament">
+            <input type="submit" name="delete" value="delete Tournament">
         </form>
 
         <?php
+        $conn=new mysqli('localhost','root','','tournament',3307);
+        if($conn->connect_error)
+        {
+            die("failed to connect the database".$conn->connect_error);
+        }
+        if(!isset($_SESSION['winner']))
+        {
+            $_SESSION['winner']='';
+        }
         // Process form submission
         if (isset($_POST['submit'])) {
             if (isset($_POST['score'])) {
@@ -144,18 +157,35 @@
 
                         // Determine the winner based on the scores
                         if ($score1 > $score2) {
-                            $winner = $player1;
+                            $_SESSION['winner']= $player1;
                         } else {
-                            $winner = $player2;}
+                            $_SESSION['winner'] = $player2;}
 
 
                         // Display the result of the match
                        
-                            echo "<p>Winner of match between $player1 and $player2: $winner</p>";
+
+                            echo "<p>Winner of match between $player1 and $player2:". $_SESSION['winner']."</p>";
                 
                     }
                 }
             }
+        }
+        if(isset($_POST['restart']))
+        {   
+            $query_restart="update players set points=0";
+            
+            if($conn->query($query_restart)===true)
+            {
+                echo "<h3> all the points are set to zero</h3>";
+            }
+        }
+        
+        if(isset($_POST['delete']))
+        {
+            $winner = $_SESSION['winner'];
+            $query_delete="delete from players where tcourt = (select tcourt from (select tcourt from players where player_1='$winner')as temp)";
+            $ex=$conn->query($query_delete);
         }
 
         // Close the connection

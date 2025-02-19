@@ -1,3 +1,29 @@
+<?php
+    $host = "localhost";    
+    $user = "root";
+    $pass = "";
+    $db = "tournament";
+    $port = 3307;
+
+    $conn = new mysqli($host, $user, $pass, $db, $port);
+
+    if ($conn->connect_error) {
+        die("Failed to connect to database: " . $conn->connect_error);
+    }
+    //getting the t_court names of the tournament
+    $query_total_tournament="SELECT court_name from create_tournament";
+        $query_total_tournament_result=$conn->query($query_total_tournament);
+        if($query_total_tournament_result)
+        {
+            $t_count=[];
+            while($arr = $query_total_tournament_result->fetch_assoc())
+            {
+                
+                $t_count[]=$arr['court_name'];                                                       //array stores the t_court name
+            }
+        }
+?>
+
 <html>
 <head>
     <title>Poll</title>
@@ -57,11 +83,16 @@
 <body>
     
     <form method="post" action="">
-        <h2>Select the court :</h2>
-        <select name="courtname">                               //complete 
-            <option value=></option>
-        </select>
 
+        <?php 
+            echo "<h2>select the court</h2>";
+            echo "<select name ='courtname'>";
+                foreach($t_count as $court)
+                {
+                    echo "<option value='$court'>$court</option>";
+                }
+            echo "</select>";
+        ?>
         <h2>Number of teams in each poll:</h2>
         <input type="number" name="limit" min="1" required>
         <h2>No.of teams to be qualified in each poll</h2>
@@ -73,17 +104,7 @@
     </form>
 
     <?php
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $db = "tournament";
-    $port = 3307;
-
-    $conn = new mysqli($host, $user, $pass, $db, $port);
-
-    if ($conn->connect_error) {
-        die("Failed to connect to database: " . $conn->connect_error);
-    }
+    
 
     if (isset($_POST['submit'])) {
         $courtname = $_POST['courtname'];
@@ -91,25 +112,19 @@
         $top=$_POST['top'];
         $query0="update create_tournament set top='$top' where court_name ='$courtname'";
         $ex=$conn->query($query0);
+        
         // Get total teams
         $query = "SELECT COUNT(*) AS total_teams FROM players WHERE tcourt = '$courtname'";
         $result = $conn->query($query);
-        //getting the team which are registered in tournament for the dropdown list
-        $reg_teams="select court_name from create_tournament";
-        $reg_teams_view=$conn->query($reg_teams);
-        if($reg_teams_view && $dropdown_arr=$reg_teams_view->fetch_assoc())
-        {
-            $reg_teams=$dropdown_arr['court_name']; //all the t_court names are stored not_checked
 
-        }
         if ($result && $row = $result->fetch_assoc()) {
             $totalTeams = $row['total_teams'];
             echo "<h3>Total teams: $totalTeams</h3>";
             echo "<h3>Court : $courtname</h3>";
 
             if ($totalTeams > 0) {
-                // Fetch players
-                $select = "SELECT player_1 FROM players WHERE tcourt = '$courtname'";
+                
+                $select = "SELECT player_1 FROM players WHERE tcourt = '$courtname'";                   // Fetch players
                 $result = $conn->query($select);
 
                 $poll = 1;
