@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset ($_POST['submit']))
 {
     $host = "localhost";
@@ -11,9 +11,9 @@ if(isset ($_POST['submit']))
     {
         die("failed to connect db".$conn->connect_error);
     }
-    $username=$_POST['username'];
+    $_SESSION['username']=$_POST['username'];
     $password=$_POST['password'];
-    $query="select password from create_tournament where court_name='$username'";
+    $query="select password from create_tournament where court_name='{$_SESSION['username']}'";
     $result=$conn->query($query);
     if($result->num_rows>0)
     {
@@ -49,7 +49,7 @@ if(isset ($_POST['submit']))
                     <h1> login</h1>
                     <div class="input-group">
                     <label for="username">Username :</label>
-                    <input type="username" id="username" name="username" placeholder="Your Username" autocomplete="off" required>
+                    <input type="username" id="username" name="username" placeholder="Your court name" autocomplete="off" required>
                     <i class='bx bx-user'></i>
                     <br><br>
                     </div>

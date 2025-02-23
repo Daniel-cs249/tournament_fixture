@@ -30,6 +30,8 @@ if (isset($_POST['submit'])) {
         // Execute the query
         if (mysqli_query($conn, $insert)) {
             echo "<script>alert('Data successfully submitted!');</script>";
+            header("refresh:1;url=menu.html");
+            exit;
         } else {
             echo "Error: " . mysqli_error($conn); // Show detailed error message
         }

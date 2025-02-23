@@ -96,7 +96,7 @@
                 }
 
                 // Fetch distinct polls for the specified court
-                $distinctpoll = "SELECT DISTINCT(poll) AS poll FROM players WHERE tcourt='venba'";
+                $distinctpoll = "SELECT DISTINCT(poll) AS poll FROM players WHERE tcourt='{$_SESSION['username']}'";
                 $selected = $conn->query($distinctpoll);
 
                 // Start table with header
@@ -107,27 +107,32 @@
                 while ($row = $selected->fetch_assoc()) {
                     $dpoll = $row['poll'];
                     // Get top players for the current poll
-                    $top = "SELECT player_1 FROM players WHERE points = (SELECT MAX(points) FROM players WHERE poll='$dpoll')";
+                    $top = "select player_1 from players where poll ='$dpoll' order by points desc limit 1"; //"SELECT player_1 FROM players WHERE points = (SELECT MAX(points) FROM players WHERE poll='$dpoll')";
                     $ttop = $conn->query($top);
-
                     while ($printtop = $ttop->fetch_assoc()) {
+                        
                         $arr[$count] = $printtop['player_1'];
                         $count++;
                     }
+                    
                 }
-
                 // Generate "Player 1 VS Player 2" combinations
-                for ($i = 0; $i < count($arr) - 1; $i++) {
+                for ($i = 0; $i < count($arr)-1; $i++) {
                     for ($j = $i + 1; $j < count($arr); $j++) {
-                        echo "<tr>
-                                <td>{$arr[$i]}</td>
-                                <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score1]' ></td>
-                                <td>VS</td>
-                                <td>{$arr[$j]}</td>
-                                <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score2]' ></td>
-                              </tr>";
+                        if ($arr[$i] != $arr[$j]) { // Avoid same player matchups
+                            echo "<tr>
+                                    <td>{$arr[$i]}</td>
+                                    <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score1]' ></td>
+                                    <td>VS</td>
+                                    <td>{$arr[$j]}</td>
+                                    <td><input type='number' name='score[{$arr[$i]}][{$arr[$j]}][score2]' ></td>
+                                  </tr>";
+                        }
                     }
                 }
+                
+                
+                
                 ?>
             </table>
             <input type="submit" name="submit" value="Submit Scores">
@@ -149,26 +154,44 @@
         // Process form submission
         if (isset($_POST['submit'])) {
             if (isset($_POST['score'])) {
-                // Iterate over each match's score
-                foreach ($_POST['score'] as $player1 => $matches) {
-                    foreach ($matches as $player2 => $score) {
+                foreach ($_POST['score'] as $player1 => $matches) {  // Extract player1
+                    foreach ($matches as $player2 => $score) {  // Extract player2
                         $score1 = (int)$score['score1'];
                         $score2 = (int)$score['score2'];
-
-                        // Determine the winner based on the scores
-                        if ($score1 > $score2) {
-                            $_SESSION['winner']= $player1;
-                        } else {
-                            $_SESSION['winner'] = $player2;}
-
-
-                        // Display the result of the match
-                       
-
-                            echo "<p>Winner of match between $player1 and $player2:". $_SESSION['winner']."</p>";
-                
+        
+                        // Store in session for later use (if needed)
+                        $_SESSION['player1'] = $player1;
+                        $_SESSION['player2'] = $player2;
+        
+                        // Determine the winner
+                        if ($score1 > $score2) 
+                        {
+                            $_SESSION['winner'] = $player1;
+                            
+                            //diplay the winner 
+                            
+                        } 
+                        elseif ($score2 > $score1) {
+                            $_SESSION['winner'] = $player2;
+                           
+                            //display the winner 
+                           
+                        }
+                        else {
+                            echo"<p>DRAW MATCH</p>";
+                        }
+        
+                        
                     }
                 }
+                    $final="select player_1 ,player_2 from players where player_1='{$_SESSION['winner']}'";
+                    $ex=$conn->query($final);
+                    if($ex)
+                    {
+                        $result=$ex->fetch_assoc();
+                        echo"<p>Winners of the tournamnet are " .$result['player_1']. " and " .$result['player_2']. "</p>";
+                    }
+                
             }
         }
         if(isset($_POST['restart']))
@@ -177,7 +200,7 @@
             
             if($conn->query($query_restart)===true)
             {
-                echo "<h3> all the points are set to zero</h3>";
+                echo "<p> all the points are set to zero</p>";
             }
         }
         
@@ -186,6 +209,7 @@
             $winner = $_SESSION['winner'];
             $query_delete="delete from players where tcourt = (select tcourt from (select tcourt from players where player_1='$winner')as temp)";
             $ex=$conn->query($query_delete);
+            echo"<p> The tournament has been deleted successfully </p>";
         }
 
         // Close the connection

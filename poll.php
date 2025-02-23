@@ -1,4 +1,5 @@
 <?php
+session_start();
     $host = "localhost";    
     $user = "root";
     $pass = "";
@@ -10,18 +11,7 @@
     if ($conn->connect_error) {
         die("Failed to connect to database: " . $conn->connect_error);
     }
-    //getting the t_court names of the tournament
-    $query_total_tournament="SELECT court_name from create_tournament";
-        $query_total_tournament_result=$conn->query($query_total_tournament);
-        if($query_total_tournament_result)
-        {
-            $t_count=[];
-            while($arr = $query_total_tournament_result->fetch_assoc())
-            {
-                
-                $t_count[]=$arr['court_name'];                                                       //array stores the t_court name
-            }
-        }
+    
 ?>
 
 <html>
@@ -41,7 +31,6 @@
             background-position: center;
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
         #table-container {
             display: flex;
@@ -78,6 +67,9 @@
         font-weight: bolder;
         color: blanchedalmond;
         }
+        h2{
+            color: rgb(212, 233, 142);
+        }
     </style>
 </head>
 <body>
@@ -85,46 +77,58 @@
     <form method="post" action="">
 
         <?php 
-            echo "<h2>select the court</h2>";
-            echo "<select name ='courtname'>";
-                foreach($t_count as $court)
-                {
-                    echo "<option value='$court'>$court</option>";
-                }
-            echo "</select>";
+            echo"<h2>Court :</h2>";
+            echo"<h3 style='color: yellow;'>{$_SESSION['username']}</h3>";
+            echo"<h2>Total number of teams </h2>";
+            echo "<input type='submit' name='totteams' value='check total teams'>";
         ?>
+    </form>
+    <?php
+    if(isset($_POST['totteams']))
+    {
+       
+        $query = "SELECT COUNT(*) AS total_teams FROM players WHERE tcourt = '{$_SESSION['username']}'";
+        $result = $conn->query($query);
+        if ($result && $row = $result->fetch_assoc()) {
+            $_SESSION['totalTeams'] = $row['total_teams'];
+            echo "<h3 style='color : yellow'>Total teams: {$_SESSION['totalTeams']}</h3>";
+        }
+    }
+    ?>
+        <form method="post" action="">
+        
         <h2>Number of teams in each poll:</h2>
-        <input type="number" name="limit" min="1" required>
+        <input type="number" name="limit" min="2" required>
         <h2>No.of teams to be qualified in each poll</h2>
         <input type="number" name="top" min="1" required>
-        <input type="submit" name="submit" value="Generate">
-        <a href="test.php" id="fixtures_a" >  
-        View-fixtures
-        </a>
-    </form>
-
+        <input type="submit" name="generate" value="Generate">
+        
+        </form>
+        <form action='' method="POST">
+            <input type='submit' name ='view_fixtures' value='view_fixtures'>
+        </form>
+        
     <?php
     
 
-    if (isset($_POST['submit'])) {
-        $courtname = $_POST['courtname'];
+    if (isset($_POST['generate'])) 
+    {
         $limit = $_POST['limit'];
-        $top=$_POST['top'];
-        $query0="update create_tournament set top='$top' where court_name ='$courtname'";
+        $_SESSION['top']=$_POST['top'];
+        $query0="update create_tournament set top='{$_SESSION['top']}' where court_name ='{$_SESSION['username']}'";
         $ex=$conn->query($query0);
         
         // Get total teams
-        $query = "SELECT COUNT(*) AS total_teams FROM players WHERE tcourt = '$courtname'";
+        $query = "SELECT COUNT(*) AS total_teams FROM players WHERE tcourt = '{$_SESSION['username']}'";
         $result = $conn->query($query);
 
-        if ($result && $row = $result->fetch_assoc()) {
-            $totalTeams = $row['total_teams'];
-            echo "<h3>Total teams: $totalTeams</h3>";
-            echo "<h3>Court : $courtname</h3>";
+        
+        echo "<h3 style='color: yellow;'>Court: {$_SESSION['username']}</h3>";
 
-            if ($totalTeams > 0) {
+
+            if ( $_SESSION['totalTeams'] > 0) {
                 
-                $select = "SELECT player_1 FROM players WHERE tcourt = '$courtname'";                   // Fetch players
+                $select = "SELECT player_1 FROM players WHERE tcourt = '{$_SESSION['username']}'";                   // Fetch players
                 $result = $conn->query($select);
 
                 $poll = 1;
@@ -156,14 +160,17 @@
                 echo "</div>";
 
             } else {
-                echo "<h3>No teams found for the court: $courtname</h3>";
+                echo "<h3>No teams found for the court: {$_SESSION['username']}</h3>";
             }
-        } else {
-            echo "<h3>Error fetching total teams.</h3>";
+        } 
+
+        if(isset($_POST['view_fixtures']))
+        {
+            header('location:Points_Upload.php');
         }
 
         $conn->close();
-    }
+    
     ?>
 </body>
 </html>
