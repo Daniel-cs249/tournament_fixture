@@ -5,115 +5,146 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create</title>
   <style>
+    /* General Styles */
     body {
       font-family: Arial, sans-serif;
-      margin:10px;
-      background-image: url(land.jpeg);
+      margin: 0;
+      padding: 0;
+      background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Gradient overlay */
+      url(land.jpeg); /* Background image */
       background-size: cover;
       background-position: center;
-     display: flex;
-     flex-direction: row;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto; /* Ensures vertical scrolling */
+      min-height: 100vh; /* Full height */
     }
 
+    /* Form Layout */
+    #whole {
+      display: flex;
+      flex-wrap: wrap; /* Prevents overflow */
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .form-container {
+      background-color: rgba(46, 126, 94, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(10,10,10,0.8);
+      max-width: 400px;
+      min-height: 700px; /* Ensures all inputs are visible */
+      margin-top: 50px; /* Push form down */
+      overflow: visible;
+    }
+
+    /* Input Styles */
     label {
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 5px;
       font-weight: bold;
+      color: white;
     }
 
     input {
-      margin-bottom: 5px;
-      padding: 5px;
-      width: 300px;
-    }
-    #whole
-    {
-      display: flex;
-    }
-    .form-container {
-      max-width: 400px;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid rgba(10,10,10,0.8);
-      border-radius: 8px;
-      background-color: rgba(46, 126, 94, 0.3);
-      left: 200px;
-      position: relative;
-    }
-    #box2
-    {
-      position: relative;
-      width: 300px;
-      left: 300px;
+      width: 70%;
       padding: 10px;
-      height: 180px;
-      border: 1px solid rgba(10,10,10,0.8);
-      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: white;
+      font-size: 16px;
+    }
+
+    /* Box2 (Username & Password) */
+    #box2 {
       background-color: rgba(46, 126, 94, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(10,10,10,0.8);
+      width: 300px;
+      height: 180px;
+      margin-top: 50px; /* Ensure it starts lower */
     }
-    #username,#password
-    {
-      width: 200px;
-    }
+
+    /* Button Styles */
     button {
-      display: block;
-      padding: 10px 20px;
+      width: 100%;
+      padding: 10px;
       background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 16px;
     }
+    input:hover {
+    border-color: #4CAF50;  /* Green border on hover */
+    background-color: rgba(76, 175, 80, 0.1); /* Light green background */
+}
 
+input:focus {
+    border-color: #45a049;  /* Darker green border when clicked */
+    background-color: rgba(76, 175, 80, 0.2);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
     button:hover {
       background-color: #45a049;
     }
   </style>
 </head>
 <body>
+
   <form action="createt_connect.php" method="post">
     <div id="whole">
-  <div class="form-container">
-    <label for="courtname">1. Court name:</label>
-    <input type="text" id="courtname" name="courtname" placeholder="Enter court name" autocomplete="off" required>
 
-    <label for="totalteams">2. Total teams:</label>
-    <input type="number" id="totalteams" name="totalteams" placeholder="Enter total teams" autocomplete="off" required>
+      <!-- Main Form -->
+      <div class="form-container">
+        <label for="courtname">1. Court name:</label>
+        <input type="text" id="courtname" name="courtname" placeholder="Enter court name" autocomplete="off" required>
 
-    <label for="category">3. Category:</label>
-    <input type="text" id="category" name="category" placeholder="Enter category" autocomplete="off" required>
+        <label for="totalteams">2. Total teams:</label>
+        <input type="number" id="totalteams" name="totalteams" placeholder="Enter total teams" autocomplete="off" required>
 
-    <label for="shuttle">4. Shuttle type:</label>
-    <input type="text" id="shuttle" name="shuttle" placeholder="Enter shuttle type" autocomplete="off" required>
+        <label for="category">3. Category:</label>
+        <input type="text" id="category" name="category" placeholder="Enter category" autocomplete="off" required>
 
-    <label for="entrance">5. Entrance fee:</label>
-    <input type="number" id="entrance" name="entrance" placeholder="Enter entrance fee" autocomplete="off" required>
+        <label for="shuttle">4. Shuttle type:</label>
+        <input type="text" id="shuttle" name="shuttle" placeholder="Enter shuttle type" autocomplete="off" required>
 
-    <label for="venue">6. Venue:</label>
-    <input type="text" id="venue" name="venue" placeholder="Enter venue" autocomplete="off" required>
+        <label for="entrance">5. Entrance fee:</label>
+        <input type="number" id="entrance" name="entrance" placeholder="Enter entrance fee" autocomplete="off" required>
 
-    <label for="date">7. Date:</label>
-    <input type="text" id="date" name="date" placeholder="Enter date" autocomplete="off" required>
+        <label for="venue">6. Venue:</label>
+        <input type="text" id="venue" name="venue" placeholder="Enter venue" autocomplete="off" required>
 
-    <label for="district">8. District:</label>
-    <input type="text" id="district" name="district" placeholder="Enter district" autocomplete="off" required>
+        <label for="date">7. Date:</label>
+        <input type="text" id="date" name="date" placeholder="Enter date" autocomplete="off" required>
 
-    <label for="upi-id">9. UPI-ID:</label>
-    <input type="text" id="upi-id" name="upi-id" placeholder="Enter UPI-ID" autocomplete="off" required>
-      
-   <button type="submit" name="submit">Submit</button>
+        <label for="district">8. District:</label>
+        <input type="text" id="district" name="district" placeholder="Enter district" autocomplete="off" required>
 
-  </div>  
-   <div id="box2">
+        <label for="upi-id">9. UPI-ID:</label>
+        <input type="text" id="upi-id" name="upi-id" placeholder="Enter UPI-ID" autocomplete="off" required>
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" placeholder="your court_name" autocomplete="off" required>
-    <label for="password">Create your Password:</label>
-    <input type="text" id="password" name="password" placeholder="password" autocomplete="off" required>
+        <button type="submit" name="submit">Submit</button>
+      </div>  
+
+      <!-- Box 2 (Username & Password) -->
+      <div id="box2">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Your court name" autocomplete="off" required>
+
+        <label for="password">Create your Password:</label>
+        <input type="password" id="password" name="password" placeholder="Password" autocomplete="off" required>
+      </div>
 
     </div>
-  </div>
-  
-</form>
+  </form>
+
 </body>
 </html>

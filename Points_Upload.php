@@ -22,10 +22,7 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        
-
         $top = $_SESSION['top'];
-        echo"$top";
         if ($top == 1) {
             header('Location: final_result.php'); // Corrected redirect
             exit();
@@ -46,55 +43,88 @@ if (isset($_POST['submit'])) {
 <html>
 <head>
     <style>
-        input {
-            border-radius: 5px;
-            border: 1px solid rgba(182, 141, 216, 0.9);
-            background-color: aliceblue;
-            font-weight: bolder;
-            width: 40px;
-        }
         body {
-            background-image: url(login3.jpg);
+            background-image: url('login3.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
         }
-        #next, #submit {
-            width: 55px;
-        }
+
         #table-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
+            width: 90%;
+            max-width: 800px;
+            margin-top: 20px;
         }
+
         table {
+            width: 100%;
             border-collapse: collapse;
-            width: 300px;
-            text-align: left;
+            text-align: center;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.1);
         }
+
         th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
         }
+
         th {
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transition: 0.3s;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
             text-align: center;
         }
-        tr:nth-child(even) {
-            background-color: rgba(182, 141, 216, 0.9);
+
+        input[type="number"]:focus {
+            background-color: rgba(255, 255, 255, 0.3);
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
         }
-        tr:nth-child(odd) {
-            background-color: rgba(99, 141, 216, 0.9);
+
+        #submit {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        #submit:hover {
+            background-color: #45a049;
         }
     </style>
     <title>Fixtures</title>
 </head>
 <body>
+
     <?php
     if (isset($_SESSION['message'])) {
         echo "<p>{$_SESSION['message']}</p>";
@@ -104,7 +134,7 @@ if (isset($_POST['submit'])) {
 
     <form action="" method="post">
         <?php
-        $pollQuery = "SELECT DISTINCT(poll) FROM players";
+        $pollQuery = "SELECT DISTINCT(poll) FROM players where tcourt='{$_SESSION['username']}'";
         $pollResult = $conn->query($pollQuery);
 
         $pollNumber = 1;
@@ -118,7 +148,7 @@ if (isset($_POST['submit'])) {
                 $players[] = $playerRow['player_1'];
             }
 
-            echo "<table id='table-container'>";
+            echo "<div id='table-container'><table>";
             echo "<tr><th colspan='5'>Poll: $pollNumber</th></tr>";
 
             if (count($players) == 1) {
@@ -138,12 +168,13 @@ if (isset($_POST['submit'])) {
                     }
                 }
             }
-            echo "</table>";
+            echo "</table></div>";
             $pollNumber++;
         }
         ?>
         <input type="submit" name="submit" id="submit" value="Submit All">
     </form>
+
 </body>
 </html>
 

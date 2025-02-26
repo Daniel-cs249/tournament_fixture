@@ -474,4 +474,8 @@ section
 {
     background-image: url(login3.jpg);
 }
-
+#tcselect
+{
+    display: none;
+    
+}

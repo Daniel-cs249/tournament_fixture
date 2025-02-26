@@ -158,32 +158,37 @@
                     foreach ($matches as $player2 => $score) {  // Extract player2
                         $score1 = (int)$score['score1'];
                         $score2 = (int)$score['score2'];
-        
-                        // Store in session for later use (if needed)
-                        $_SESSION['player1'] = $player1;
-                        $_SESSION['player2'] = $player2;
-        
-                        // Determine the winner
-                        if ($score1 > $score2) 
-                        {
-                            $_SESSION['winner'] = $player1;
-                            
-                            //diplay the winner 
-                            
-                        } 
-                        elseif ($score2 > $score1) {
-                            $_SESSION['winner'] = $player2;
-                           
-                            //display the winner 
-                           
-                        }
-                        else {
-                            echo"<p>DRAW MATCH</p>";
-                        }
-        
-                        
+                        $updatePlayer1 = "UPDATE players SET points = points + $score1 WHERE player_1 = '$player1'";
+                        $updatePlayer2 = "UPDATE players SET points = points + $score2 WHERE player_1 = '$player2'";
+                        $conn->query($updatePlayer1);
+                        $conn->query($updatePlayer2);
                     }
                 }
+                $win="select player_1 from players where tcourt='{$_SESSION['username']}' order by points desc limit 1";
+                $query_win=$conn->query($win);
+                if($row=$query_win->fetch_assoc())
+                {
+                    $_SESSION['winner']=$row['player_1'];
+                }
+                $draw="select player_1 from players where points=(select max(points) from players where tcourt='{$_SESSION['username']}')";
+                $drawres=$conn->query($draw);
+                $count=0;
+                $names=[];
+                while($row=$drawres->fetch_assoc())
+                {
+                    $names[]=$row['player_1'];
+                    $count++;
+                }
+                if($count>=2)
+                {
+                    echo"<p>The Match is draw between</p>";
+                    foreach($names as $name)
+                    {
+                        echo"<p>$name</p>";
+                    }
+                }
+                else
+                {
                     $final="select player_1 ,player_2 from players where player_1='{$_SESSION['winner']}'";
                     $ex=$conn->query($final);
                     if($ex)
@@ -191,6 +196,8 @@
                         $result=$ex->fetch_assoc();
                         echo"<p>Winners of the tournamnet are " .$result['player_1']. " and " .$result['player_2']. "</p>";
                     }
+                }
+                    
                 
             }
         }

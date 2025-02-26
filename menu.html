@@ -1,64 +1,283 @@
 <html>
     <head>
-        <title>MENU</title>
-        <link rel="stylesheet" href="style.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        
+        <title>
+            HOME
+        </title>
+       <style>
+.autoshow {
+    animation: downtoup 1.2s ease-out both;
+    animation-timeline: view(70% 5%);
+    animation-delay: var(--delay, 0s);
+}
+@keyframes downtoup {
+    from {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
 
+.scroll-right {
+    animation: lefttoright 1.2s ease-out both;
+    animation-timeline: view(70% 5%);
+    animation-delay: var(--delay, 0s);
+}
+@keyframes lefttoright {
+    from {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.scroll-left {
+    animation: righttoleft 1.2s ease-out both;
+    animation-timeline: view(70% 5%);
+    animation-delay: var(--delay, 0s);
+}
+@keyframes righttoleft {
+    from {
+        opacity: 0;
+        transform: translateX(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.still
+{
+    
+    animation: still both;
+    animation-timeline: view(70% 5%);
+
+}
+@keyframes still {
+    from {
+        opacity: 0;
+        transform: translateX(0)scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0)scale(1); 
+    }
+} 
+
+#main_titleh1
+{
+    font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 60px;
+    text-align: center;
+}
+#menu
+{
+    font-family: "Pacifico", serif;
+  font-weight: 40;
+  font-style: normal;
+  font-size: 30px;
+    text-align: center;
+}
+.scroll-right,
+.scroll-left {
+    
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+#new
+{
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(foresr.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed ;
+    background-repeat: no-repeat;
+    color: white;
+}
+#maintitlediv
+{
+    display: flex;
+    justify-content: center;
+}
+
+h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #e1f31d; 
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+p {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    color: #f9f6f6;
+    line-height: 1.6;
+    text-align: center;
+    margin: 10px auto;
+    width: 80%;
+}
+
+
+h2 {
+    font-size: 24px;
+    color: #10f3ab; 
+    text-align: center;
+    margin-top: 30px;
+    font-family: "Poppins", sans-serif;
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    width: 80%;
+}
+
+
+ul li {
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    color: #333;
+    background: #f8f9fa;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+    position: relative; /* ✅ Helps with movement */
+    will-change: transform;
+}
+
+ul li:hover {
+    transform: translateY(-0.8px); /* ✅ Now should work */
+    background: #e3f2fd;
+    animation: none; /* ✅ Prevents conflict */
+}
+
+/* Emoji styling inside the list */
+ul li strong {
+    margin-left: 10px;
+}
+
+/* Footer paragraph */
+p:last-of-type {
+    font-style: italic;
+    font-weight: bold;
+    color: #e1f31d;
+}
+/* Styling for h2 elements */
+.scroll-right,
+.scroll-left {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    overflow: hidden;
+    animation-fill-mode: forwards;
+    will-change: transform;
+}
+/* Hover Effect */
+.scroll-right:hover,
+.scroll-left:hover {
+    animation: none;
+    transform: scale(1.1) translateY(-5px); /* Slightly enlarge and move up */
+    color: #ff9800; /* Change text color */
+    text-shadow: 2px 2px 10px rgba(255, 152, 0, 0.7); /* Glowing effect */
+}
+
+/* Transparent Box Effect */
+.scroll-right::before,
+.scroll-left::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(82, 217, 100, 0.1); /* Transparent White */
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Show the box on hover */
+.scroll-right:hover::before,
+.scroll-left:hover::before {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+a {
+    display: inline-block; 
+    pointer-events: auto; 
+    text-decoration: none; 
+    color: inherit; /* Keeps the text color */
+}
+       </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=view_apps" />
     </head>
-    <body>
-        <input type="checkbox" id="check">
-        <label for="check">
-            <i class='bx bx-menu' id="menu"></i>
-            <i class='bx bxs-left-arrow-circle' id="cancel"></i>
-        </label>
-    <div class="sidebar">
-        <header>MENU</header>
+    <body id="new">
+        <div id="maintitlediv"> 
+        <h1 id="main_titleh1">Welcome <br>To<br>Web Tournament Fixtures</h1>
+        </div>
+        <h3 id="menu"> MENU <box-icon name='java' type='logo' color="white" size="xl"></box-icon></h3>
+        <p >A dynamic web-based solution designed to streamline tournament scheduling and management!</p>
+    
+        <h2 class="scroll-right"><a href="commingsoon.html">ADMIN </a> <box-icon type='logo' name='gitlab' color="white" size="xl" animation='flashing'></box-icon></box-icon></h2>
+        <h2 class="scroll-left"><a href="createt.html">CREATE TOURNAMENT </a> <box-icon name='plus' animation='flashing' size="xl" color="white"></box-icon></box-icon></h2>
+        <h2 class="scroll-right"><a href="http://localhost:3000/login.php">LOAD TOURNAMENT </a> <box-icon name='cloud-upload' animation='flashing' size="xl" color="white"></box-icon></h2>
+        <h2 class="scroll-left"><a href="http://localhost:3000/namentry.php">JOIN TOURNAMENT  </a><box-icon name='run' animation='flashing' size="xl" color="white" ></box-icon></h2>
+        <h2 class="scroll-right">HELP  <box-icon name='help-circle' animation='flashing' size="xl" color="white"></box-icon></h2>
+
+        <h3 class="still"> Key Features  <box-icon name='key' type='solid' size="xl" color="gold"></box-icon></h3>
         <ul>
-            <li><a href="http://localhost:3000/commingsoon.html"><i class='bx bxs-home-alt-2'></i>Admin</a></li>
-            <li><a href="http://localhost:3000/createt.html"><i class='bx bx-plus'></i> Create tournament</a></li>
-            <li><a href="http://localhost:3000/login.php"><i class='bx bxl-soundcloud'></i>Your tournament</a></li>
-            <li><a href="http://localhost:3000/commingsoon.html"><i class='bx bx-question-mark'></i>Faq</a></li>
+            <li class="autoshow" style="--delay: 0s;">✅ <strong>Automated Fixture Generation</strong> – Generate match schedules effortlessly.</li>
+            <li class="autoshow" style="--delay: 0.2s;">✅ <strong>Real-time Updates</strong> – Keep players and fans informed with live fixture changes.</li>
+            <li class="autoshow" style="--delay: 0.4s;">✅ <strong>Customizable Tournament Formats</strong> – Supports round-robin, knockout, and league formats.</li>
+            <li class="autoshow" style="--delay: 0.6s;">✅ <strong>User-Friendly Interface</strong> – Intuitive and responsive design for easy navigation.</li>
+            <li class="autoshow" style="--delay: 0.8s;">✅ <strong>Team & Player Management</strong> – Track stats, scores, and standings seamlessly.</li>
         </ul>
-    </div>
-    <section></section>
+    
+        <p>This project aims to simplify the tournament organization process for sports leagues, esports events, and community competitions.</p>
+    
+        <p>I’d love to hear your thoughts and feedback! Let’s connect and explore ways to enhance tournament management in the digital era. 🚀🎮⚽🏀</p>
 
-
-            <div class="city">
-                <h2 id="cityf">Cities</h2>
-                <fieldset id="city_fieldset">
-                    <h3>Trichy</h3>
-                    <a href="http://localhost:3000/trichy.html"><img id="trichy" src="trichy.jpg" alt="trichy"></a>
-                    <h3>Madurai</h3>
-                    <img id="madurai" src="madurai.jpg" alt="madurai">                   
-                     <h3>Chennai</h3>
-                     <img id="chennai" src="chennai.jpg" alt="chennai">
-                </fieldset>
-            </div> 
-            
-            <div class="feather">
-                <h2 id="featherf">Feather Tournament</h2>
-                <fieldset id="f_fieldset">
-                    <h3>Drona</h3>
-                    <img id="drona" src="drona.png" alt="drona">
-                    <h3>KSI</h3>
-                    <img id="ksi" src="module6.jpeg" alt="ksi">                   
-                     <h3>Chola</h3>
-                     <img id="chola" src="wcourt3.jpg" alt="chola">
-                </fieldset>
-            </div> 
-            
-            <div class="nylon">
-                <h2 id="nylonf">Nylone Tournament</h2>
-                <fieldset id="n_fieldset">
-                    <h3>Smashmad</h3>
-                    <img id="Smashmad" src="module1.jpeg" alt="Smashmad">
-                    <h3>Baybadminton</h3>
-                    <img id="baybadminton" src="module3.jpeg" alt="baybadminton">                   
-                     <h3>Venba</h3>
-                     <img id="venba" src="module4.jpeg" alt="venba">
-                </fieldset>
-            </div> 
-
+        
+        
     </body>
 </html>

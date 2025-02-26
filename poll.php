@@ -18,57 +18,79 @@ session_start();
 <head>
     <title>Poll</title>
     <style>
-        input
-        {
-            border-radius: 10px;
-            border: 1px solid rgba(182, 141, 216, 0.9);
-            background-color: aliceblue;
-            font-weight: bolder;
-        }
-        body {
-            background-image: url(login3.jpg);
+           body {
+            background-image: url('login3.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             flex-direction: column;
+            font-family: Arial, sans-serif;
+            color: white;
         }
-        #table-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px; /* Spacing between tables */
-            margin: 20px 0;
-        }
-        table {
-            border-collapse: collapse;
-            width: 300px;
+
+        .container {
+            width: 60%;
+            max-width: 600px;
+            margin: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: left;
-            border: 1px solid #ddd;
         }
-        th, td {
+
+        input, button {
             padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
         }
-        th {
-            background-color: rgba(255, 255, 255, 0.5);
+
+        button {
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #table-container {
+            width: 30%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             text-align: center;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5); /* Made darker */
         }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+        }
+
         tr:nth-child(even) {
-            background-color: rgba(182, 141, 216, 0.9);
+            background-color: rgba(255, 255, 255, 0.2);
         }
-        tr:nth-child(odd) {
-            background-color: rgba(99, 141, 216, 0.9);
-        }
-        #fixtures_a
-        {
-        text-decoration:none;
-        list-style: none;
-        font-weight: bolder;
-        color: blanchedalmond;
-        }
-        h2{
-            color: rgb(212, 233, 142);
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transition: 0.3s;
         }
     </style>
 </head>
@@ -105,7 +127,7 @@ session_start();
         
         </form>
         <form action='' method="POST">
-            <input type='submit' name ='view_fixtures' value='view_fixtures'>
+            <input type='submit' name ='view_fixtures' value='view Fixtures'>
         </form>
         
     <?php
